@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>LifeTrack — Dashboard</title>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body data-page="dashboard">
+
+<nav class="navbar">
+  <a class="nav-brand" href="index.html">
+    <div class="nav-logo-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+    <span class="nav-title">LifeTrack</span><span class="nav-tag">PS-09</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link active" href="dashboard.html">Dashboard</a>
+    <a class="nav-link" href="goals.html">Goals</a>
+    <a class="nav-link" href="insights.html">Insights</a>
+  </div>
+  <div class="nav-right">
+    <div class="conn-badge offline"><span class="conn-dot"></span>Offline Mode</div>
+    <a class="nav-cta" href="goals.html">+ Add Goal</a>
+    <button class="nav-burger">☰</button>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- WELCOME CARD -->
+  <div class="welcome-card" style="margin-bottom:20px">
+    <div>
+      <h2 id="wd-name">Welcome 👋</h2>
+      <p id="wd-personality">Loading your profile…</p>
+    </div>
+    <div class="personality-pill" id="wd-pill">—</div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="icon-box indigo"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+      <div class="stat-body"><div class="stat-label">Final Wealth (Age 80)</div><div class="stat-val" id="s-wealth">₹—</div><div class="stat-hint">Projected corpus</div></div>
+    </div>
+    <div class="stat-card">
+      <div class="icon-box green"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div>
+      <div class="stat-body"><div class="stat-label">Monthly Savings</div><div class="stat-val" id="s-savings">₹—</div><div class="stat-hint">Current contribution</div></div>
+    </div>
+    <div class="stat-card">
+      <div class="icon-box amber"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="stat-body"><div class="stat-label">Goals On Track</div><div class="stat-val" id="s-ontrack">—</div><div class="stat-hint">Achievable goals</div></div>
+    </div>
+    <div class="stat-card">
+      <div class="icon-box rose"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+      <div class="stat-body"><div class="stat-label">Financial Health Score</div><div class="stat-val" id="s-score">—</div><div class="stat-hint">Based on your profile</div></div>
+    </div>
+  </div>
+
+  <div class="layout">
+
+    <!-- SIDEBAR: WHAT-IF CONTROLS -->
+    <aside class="sidebar">
+      <div class="card">
+        <div class="card-header"><div><div class="card-title">What-If Controls</div><div class="card-sub">Adjust and see live impact</div></div></div>
+        <div class="slider-grp"><label>Current Age <span class="sv" id="lbl-age">28</span></label><input type="range" id="sl-age" min="18" max="60"/></div>
+        <div class="slider-grp"><label>Monthly Savings <span class="sv" id="lbl-sav">₹15,000</span></label><input type="range" id="sl-sav" min="1000" max="200000" step="1000"/></div>
+        <div class="slider-grp"><label>Net Worth <span class="sv" id="lbl-nw">₹2,00,000</span></label><input type="range" id="sl-nw" min="0" max="10000000" step="10000"/></div>
+        <div class="slider-grp"><label>Annual Return <span class="sv" id="lbl-ret">10%</span></label><input type="range" id="sl-ret" min="1" max="30"/></div>
+        <div class="toggle-row">
+          <label class="toggle-label"><input type="checkbox" id="infl-tog"/><span class="tog"></span>Inflation Adjust</label>
+        </div>
+        <div id="infl-grp" style="display:none">
+          <div class="slider-grp"><label>Inflation Rate <span class="sv" id="lbl-infl">5%</span></label><input type="range" id="sl-infl" min="1" max="15"/></div>
+        </div>
+        <div style="border-top:1px solid #E5E7EB;padding-top:14px;margin-top:4px">
+          <div class="card-sub" style="margin-bottom:8px">Zoom View</div>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-sm btn-outline zoom-btn active" data-zoom="full">Full Life</button>
+            <button class="btn btn-sm btn-outline zoom-btn" data-zoom="10">10 Year</button>
+            <button class="btn btn-sm btn-outline zoom-btn" data-zoom="5">5 Year</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main">
+
+      <!-- CHART -->
+      <div class="card">
+        <div class="card-header">
+          <div><div class="card-title">Wealth Projection</div><div class="card-sub">Compound growth · milestone drawdowns shown as dots</div></div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:.78rem;font-weight:600;color:#6B7280">
+            <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#4F46E5;margin-right:4px"></span>Wealth</span>
+            <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#059669;margin-right:4px"></span>On Track</span>
+            <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#E11D48;margin-right:4px"></span>At Risk</span>
+          </div>
+        </div>
+        <div class="canvas-wrap"><canvas id="projChart"></canvas></div>
+      </div>
+
+      <!-- SMART INSIGHTS -->
+      <div class="card">
+        <div class="card-header"><div><div class="card-title">Smart Insights</div><div class="card-sub">Personalised suggestions based on your goals</div></div>
+          <a class="btn btn-sm btn-outline" href="insights.html">Full Insights →</a>
+        </div>
+        <div id="insight-box"><div class="insight-item neutral">📊 Add goals to see smart insights.</div></div>
+      </div>
+
+      <!-- QUICK LINKS -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px">
+        <a href="goals.html" class="card card-sm" style="text-align:center;text-decoration:none;transition:transform .2s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+          <div style="font-size:1.6rem;margin-bottom:6px">🎯</div>
+          <div style="font-weight:700;font-size:.9rem">Manage Goals</div>
+          <div style="font-size:.78rem;color:#6B7280;margin-top:3px">Add, edit, delete milestones</div>
+        </a>
+        <a href="insights.html" class="card card-sm" style="text-align:center;text-decoration:none;transition:transform .2s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+          <div style="font-size:1.6rem;margin-bottom:6px">🧠</div>
+          <div style="font-weight:700;font-size:.9rem">Deep Insights</div>
+          <div style="font-size:.78rem;color:#6B7280;margin-top:3px">Personality, score, conflicts</div>
+        </a>
+        <a href="onboarding.html" class="card card-sm" style="text-align:center;text-decoration:none;transition:transform .2s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+          <div style="font-size:1.6rem;margin-bottom:6px">✏️</div>
+          <div style="font-weight:700;font-size:.9rem">Edit Profile</div>
+          <div style="font-size:.78rem;color:#6B7280;margin-top:3px">Update your onboarding data</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+window.addEventListener('resize',()=>{
+  loadSettings().then(s=>loadGoals().then(g=>{
+    const{pts,dds}=buildProjection(s,g);
+    drawChart('projChart',pts,dds,'full',s.age);
+  }));
+});
+</script>
+</body>
+</html>

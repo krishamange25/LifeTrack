@@ -1,0 +1,47 @@
+{
+  "users": [
+    {
+      "email": "krisha@gmail.com",
+      "password": "123456789",
+      "name": "Krisha",
+      "id": "1777093990366"
+    }
+  ],
+  "goals": [
+    {
+      "id": "1777094186390",
+      "title": "Education",
+      "age": 23,
+      "cost": 1000000,
+      "category": "House"
+    }
+  ],
+  "settings": {
+    "age": 28,
+    "savings": 15000,
+    "netWorth": 200000,
+    "ret": 10,
+    "inflOn": false,
+    "inflRate": 5
+  },
+  "user": {
+    "name": "Krisha",
+    "age": 19,
+    "city": "Mumbai",
+    "occupation": "Student",
+    "income": 0,
+    "expenses": 0,
+    "netWorth": 0,
+    "savings": 0,
+    "tracksFinance": false,
+    "hasApp": false,
+    "checkFreq": "Weekly",
+    "savesFirst": false,
+    "extraAction": "Save",
+    "hasEmergency": false,
+    "emergencyMonths": 0,
+    "mainGoal": "Buy a House",
+    "riskPref": "Growth",
+    "priority": "High"
+  }
+}

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>LifeTrack — Onboarding</title>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body data-page="onboarding">
+
+<nav class="navbar">
+  <a class="nav-brand" href="index.html">
+    <div class="nav-logo-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+    <span class="nav-title">LifeTrack</span><span class="nav-tag">PS-09</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="dashboard.html">Dashboard</a>
+    <a class="nav-link" href="goals.html">Goals</a>
+    <a class="nav-link" href="insights.html">Insights</a>
+  </div>
+  <div class="nav-right"><div class="conn-badge offline"><span class="conn-dot"></span>Offline Mode</div></div>
+</nav>
+
+<div class="ob-wrap">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+    <div style="font-size:.82rem;font-weight:700;color:#4F46E5">Setting up your profile</div>
+    <div class="ob-step-label" id="ob-step-lbl">Step 1 of 5</div>
+  </div>
+  <div class="ob-progress"><div class="ob-bar" id="ob-bar" style="width:20%"></div></div>
+
+  <div class="ob-card">
+
+    <!-- STEP 1: Basic Info -->
+    <div class="ob-step active" id="step1">
+      <h2>Basic Information</h2>
+      <p class="ob-desc">Let's start with some basics about you.</p>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Full Name</label><input id="ob-name" class="form-input" placeholder="Krisha Patel"/></div>
+        <div class="form-group"><label class="form-label">Current Age</label><input id="ob-age" type="number" class="form-input" placeholder="24" min="18" max="60"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">City</label><input id="ob-city" class="form-input" placeholder="Mumbai"/></div>
+        <div class="form-group"><label class="form-label">Occupation</label>
+          <select id="ob-occ" class="form-input">
+            <option>Student</option><option>Salaried</option><option>Self-Employed</option>
+            <option>Freelancer</option><option>Business Owner</option><option>Other</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: Financial Status -->
+    <div class="ob-step" id="step2">
+      <h2>Financial Status</h2>
+      <p class="ob-desc">Help us understand your current finances.</p>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Monthly Income (₹)</label><input id="ob-income" type="number" class="form-input" placeholder="50000"/></div>
+        <div class="form-group"><label class="form-label">Monthly Expenses (₹)</label><input id="ob-expenses" type="number" class="form-input" placeholder="30000"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Current Net Worth (₹)</label><input id="ob-networth" type="number" class="form-input" placeholder="200000"/></div>
+        <div class="form-group"><label class="form-label">Monthly Savings (₹)</label><input id="ob-savings" type="number" class="form-input" placeholder="15000"/></div>
+      </div>
+    </div>
+
+    <!-- STEP 3: Finance Experience -->
+    <div class="ob-step" id="step3">
+      <h2>Finance Experience</h2>
+      <p class="ob-desc">Tell us about your financial habits.</p>
+      <div class="form-group">
+        <label class="form-label">Have you tracked your finances before?</label>
+        <div class="radio-group">
+          <div class="radio-btn"><input type="radio" name="track" id="tr-y" value="Yes"/><label for="tr-y">Yes</label></div>
+          <div class="radio-btn"><input type="radio" name="track" id="tr-n" value="No" checked/><label for="tr-n">No</label></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Have you used a finance app before?</label>
+        <div class="radio-group">
+          <div class="radio-btn"><input type="radio" name="app" id="app-y" value="Yes"/><label for="app-y">Yes</label></div>
+          <div class="radio-btn"><input type="radio" name="app" id="app-n" value="No" checked/><label for="app-n">No</label></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">How often do you check your bank balance?</label>
+        <div class="radio-group">
+          <div class="radio-btn"><input type="radio" name="freq" id="f-d" value="Daily"/><label for="f-d">Daily</label></div>
+          <div class="radio-btn"><input type="radio" name="freq" id="f-w" value="Weekly" checked/><label for="f-w">Weekly</label></div>
+          <div class="radio-btn"><input type="radio" name="freq" id="f-m" value="Monthly"/><label for="f-m">Monthly</label></div>
+          <div class="radio-btn"><input type="radio" name="freq" id="f-r" value="Rarely"/><label for="f-r">Rarely</label></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4: Behaviour -->
+    <div class="ob-step" id="step4">
+      <h2>Behaviour &amp; Emergency</h2>
+      <p class="ob-desc">Understanding your money habits.</p>
+      <div class="form-group">
+        <label class="form-label">Do you save before spending (pay yourself first)?</label>
+        <div class="radio-group">
+          <div class="radio-btn"><input type="radio" name="saveFirst" id="sf-y" value="Yes"/><label for="sf-y">Yes</label></div>
+          <div class="radio-btn"><input type="radio" name="saveFirst" id="sf-n" value="No" checked/><label for="sf-n">No</label></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">What do you do with extra money?</label>
+        <div class="radio-group">
+          <div class="radio-btn"><input type="radio" name="extra" id="ex-s" value="Save" checked/><label for="ex-s">Save</label></div>
+          <div class="radio-btn"><input type="radio" name="extra" id="ex-i" value="Invest"/><label for="ex-i">Invest</label></div>
+          <div class="radio-btn"><input type="radio" name="extra" id="ex-sp" value="Spend"/><label for="ex-sp">Spend</label></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Do you have an emergency fund?</label>
+        <div class="radio-group">
+          <div class="radio-btn"><input type="radio" name="emerg" id="em-y" value="Yes"/><label for="em-y">Yes</label></div>
+          <div class="radio-btn"><input type="radio" name="emerg" id="em-n" value="No" checked/><label for="em-n">No</label></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Months you can survive without income</label>
+        <input id="ob-months" type="number" class="form-input" placeholder="3" min="0" max="36"/>
+      </div>
+    </div>
+
+    <!-- STEP 5: Goals & Risk -->
+    <div class="ob-step" id="step5">
+      <h2>Goals &amp; Risk Appetite</h2>
+      <p class="ob-desc">What's your primary financial goal?</p>
+      <div class="form-group">
+        <label class="form-label">Main Financial Goal</label>
+        <select id="ob-goal" class="form-input">
+          <option>Buy a House</option><option>Start a Business</option><option>Early Retirement</option>
+          <option>Children's Education</option><option>Wealth Building</option><option>Travel</option><option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Risk Preference</label>
+        <div class="radio-group">
+          <div class="radio-btn"><input type="radio" name="risk" id="r-s" value="Safe" checked/><label for="r-s">🛡️ Safe</label></div>
+          <div class="radio-btn"><input type="radio" name="risk" id="r-b" value="Balanced"/><label for="r-b">⚖️ Balanced</label></div>
+          <div class="radio-btn"><input type="radio" name="risk" id="r-g" value="Growth"/><label for="r-g">🚀 Growth</label></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Priority Level</label>
+        <div class="radio-group">
+          <div class="radio-btn"><input type="radio" name="priority" id="p-h" value="High" checked/><label for="p-h">High</label></div>
+          <div class="radio-btn"><input type="radio" name="priority" id="p-m" value="Medium"/><label for="p-m">Medium</label></div>
+          <div class="radio-btn"><input type="radio" name="priority" id="p-l" value="Low"/><label for="p-l">Low</label></div>
+        </div>
+      </div>
+      <div style="background:#EEF2FF;border-radius:12px;padding:16px;margin-top:16px;font-size:.85rem;color:#312E81">
+        🎉 Almost done! Click <strong>Finish</strong> to save your profile and go to the dashboard.
+      </div>
+    </div>
+
+    <!-- NAV BUTTONS -->
+    <div class="ob-nav">
+      <button class="btn btn-outline" id="ob-back" style="visibility:hidden">← Back</button>
+      <button class="btn btn-primary" id="ob-next">Next →</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

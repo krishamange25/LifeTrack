@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>LifeTrack — Login</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+  .auth-container {
+    min-height: calc(100vh - var(--nav-h));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: linear-gradient(160deg, var(--bg) 60%, var(--indigo-l));
+  }
+  .auth-card {
+    max-width: 400px;
+    width: 100%;
+    padding: 40px;
+  }
+  .auth-header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .auth-header h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+  }
+  .auth-header p {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .switch-auth {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .switch-auth a {
+    color: var(--indigo);
+    font-weight: 700;
+  }
+</style>
+</head>
+<body data-page="login">
+
+<nav class="navbar">
+  <a class="nav-brand" href="index.html">
+    <div class="nav-logo-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+    <span class="nav-title">LifeTrack</span><span class="nav-tag">PS-09</span>
+  </a>
+</nav>
+
+<div class="auth-container">
+  <div class="card auth-card">
+    
+    <!-- LOGIN FORM -->
+    <form id="login-form">
+      <div class="auth-header">
+        <h2>Welcome Back</h2>
+        <p>Log in to manage your life goals</p>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" id="l-email" class="form-input" placeholder="krisha@example.com" required/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input type="password" id="l-pass" class="form-input" placeholder="••••••••" required/>
+      </div>
+      <button type="submit" class="btn btn-primary btn-full" style="margin-top:12px">Login to Dashboard</button>
+      <div class="switch-auth">
+        Don't have an account? <a href="#" id="show-signup">Sign up for free</a>
+      </div>
+    </form>
+
+    <!-- SIGNUP FORM -->
+    <form id="signup-form" style="display:none">
+      <div class="auth-header">
+        <h2>Create Account</h2>
+        <p>Start your financial planning journey</p>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Full Name</label>
+        <input type="text" id="s-name" class="form-input" placeholder="Krisha Patel" required/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" id="s-email" class="form-input" placeholder="krisha@example.com" required/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Create Password</label>
+        <input type="password" id="s-pass" class="form-input" placeholder="••••••••" required/>
+      </div>
+      <button type="submit" class="btn btn-primary btn-full" style="margin-top:12px">Create My Account</button>
+      <div class="switch-auth">
+        Already have an account? <a href="#" id="show-login">Log in here</a>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<footer class="footer">
+  © 2026 LifeTrack · Secure Login · PS-09
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

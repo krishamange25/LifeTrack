@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LifeTrack — Your Life, Planned.</title>
+  <meta name="description" content="LifeTrack: Plan your life milestones, project your savings, and track financial goals with smart compound projection." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-brand">
+    <div class="nav-logo">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <rect width="28" height="28" rx="8" fill="#4F46E5"/>
+        <path d="M7 14h4l3-7 4 14 3-7h3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="brand-name">LifeTrack</span>
+      <span class="brand-tag">PS-09</span>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="#section-stats" class="nav-link" onclick="smoothScroll('section-stats')">Dashboard</a>
+    <a href="#section-chart" class="nav-link" onclick="smoothScroll('section-chart')">Projection</a>
+    <a href="#section-timeline" class="nav-link" onclick="smoothScroll('section-timeline')">Timeline</a>
+    <a href="#section-goals" class="nav-link" onclick="smoothScroll('section-goals')">Goals</a>
+  </div>
+  <div class="nav-zoom">
+    <span class="zoom-label">View:</span>
+    <button class="zoom-btn active" id="zoom-full" onclick="setZoom('full')">Full Life</button>
+    <button class="zoom-btn" id="zoom-10" onclick="setZoom('10')">10 Year</button>
+    <button class="zoom-btn" id="zoom-5" onclick="setZoom('5')">5 Year</button>
+  </div>
+  <button class="nav-mobile-toggle" onclick="toggleMobileSidebar()">&#9776;</button>
+</nav>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+
+    <!-- WHAT-IF CONTROLS -->
+    <div class="sidebar-card" id="whatif-panel">
+      <div class="sidebar-card-header">
+        <div class="sidebar-icon indigo">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        </div>
+        <h3>What-If Controls</h3>
+      </div>
+
+      <div class="slider-group">
+        <label>Current Age <span class="slider-val" id="val-age">28</span></label>
+        <input type="range" id="sl-age" min="18" max="60" value="28" oninput="updateSlider('age',this.value)" />
+      </div>
+      <div class="slider-group">
+        <label>Monthly Savings <span class="slider-val" id="val-savings">₹15,000</span></label>
+        <input type="range" id="sl-savings" min="1000" max="200000" step="1000" value="15000" oninput="updateSlider('savings',this.value)" />
+      </div>
+      <div class="slider-group">
+        <label>Current Net Worth <span class="slider-val" id="val-networth">₹2,00,000</span></label>
+        <input type="range" id="sl-networth" min="0" max="10000000" step="10000" value="200000" oninput="updateSlider('networth',this.value)" />
+      </div>
+      <div class="slider-group">
+        <label>Annual Return <span class="slider-val" id="val-return">10%</span></label>
+        <input type="range" id="sl-return" min="1" max="30" value="10" oninput="updateSlider('return',this.value)" />
+      </div>
+
+      <div class="toggle-row">
+        <label class="toggle-label">
+          <input type="checkbox" id="inflation-toggle" onchange="updateProjection()" />
+          <span class="toggle-switch"></span>
+          Adjust for Inflation
+        </label>
+        <span class="slider-val" id="val-inflation" style="display:none">5%</span>
+      </div>
+      <div class="slider-group" id="inflation-slider-group" style="display:none">
+        <label>Inflation Rate</label>
+        <input type="range" id="sl-inflation" min="1" max="15" value="5" oninput="updateSlider('inflation',this.value)" />
+      </div>
+    </div>
+
+    <!-- ADD MILESTONE FORM -->
+    <div class="sidebar-card" id="add-milestone-panel">
+      <div class="sidebar-card-header">
+        <div class="sidebar-icon emerald">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <h3>Add Milestone</h3>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Title</label>
+        <input type="text" id="m-title" class="form-input" placeholder="e.g. Buy a House" />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Target Age</label>
+          <input type="number" id="m-age" class="form-input" placeholder="32" min="20" max="80" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Cost (₹)</label>
+          <input type="number" id="m-cost" class="form-input" placeholder="5000000" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Category</label>
+        <select id="m-cat" class="form-input">
+          <option value="House">🏠 House</option>
+          <option value="Vehicle">🚗 Vehicle</option>
+          <option value="Business">💼 Business</option>
+          <option value="Education">🎓 Education</option>
+          <option value="Health">❤️ Health</option>
+          <option value="Travel">✈️ Travel</option>
+          <option value="Family">👨‍👩‍👧 Family</option>
+          <option value="Security">🛡️ Security</option>
+        </select>
+      </div>
+      <button class="btn-primary" onclick="addMilestone()">Add Milestone</button>
+    </div>
+
+    <!-- GOAL TEMPLATES -->
+    <div class="sidebar-card">
+      <div class="sidebar-card-header">
+        <div class="sidebar-icon amber">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h3>Goal Templates</h3>
+      </div>
+      <div class="template-grid">
+        <button class="template-btn" onclick="useTemplate('apartment')">🏠 Buy Apartment</button>
+        <button class="template-btn" onclick="useTemplate('business')">💼 Start Business</button>
+        <button class="template-btn" onclick="useTemplate('studies')">🎓 Higher Studies</button>
+        <button class="template-btn" onclick="useTemplate('emergency')">🛡️ Emergency Fund</button>
+        <button class="template-btn" onclick="useTemplate('trip')">✈️ Dream Trip</button>
+        <button class="template-btn" onclick="useTemplate('car')">🚗 Buy a Car</button>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <!-- STATS CARDS -->
+    <section id="section-stats" class="section">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon indigo">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          </div>
+          <div class="stat-body">
+            <p class="stat-label">Final Wealth (Age 80)</p>
+            <h2 class="stat-value" id="stat-wealth">₹0</h2>
+            <p class="stat-sub" id="stat-wealth-sub">Projected corpus</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon emerald">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+          </div>
+          <div class="stat-body">
+            <p class="stat-label">Monthly Savings</p>
+            <h2 class="stat-value" id="stat-savings">₹0</h2>
+            <p class="stat-sub">Current contribution</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon amber">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="stat-body">
+            <p class="stat-label">Goals On Track</p>
+            <h2 class="stat-value" id="stat-ontrack">0 / 0</h2>
+            <p class="stat-sub" id="stat-ontrack-sub">Achievable goals</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon rose">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </div>
+          <div class="stat-body">
+            <p class="stat-label">Total Goal Cost</p>
+            <h2 class="stat-value" id="stat-totalcost">₹0</h2>
+            <p class="stat-sub">Sum of all milestones</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTION CHART -->
+    <section id="section-chart" class="section">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title">Wealth Projection</h2>
+            <p class="card-subtitle">Compound growth with milestone drawdowns</p>
+          </div>
+          <div class="chart-legend">
+            <span class="legend-dot indigo"></span><span>Wealth</span>
+            <span class="legend-dot rose"></span><span>Drawdowns</span>
+          </div>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="projectionChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- AGE TIMELINE -->
+    <section id="section-timeline" class="section">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Life Timeline</h2>
+          <p class="card-subtitle">Ages 20 – 80 · Click a milestone to view details</p>
+        </div>
+        <div class="timeline-wrap" id="timeline-wrap">
+          <div class="timeline-track" id="timeline-track">
+            <div class="timeline-bar"></div>
+            <div class="timeline-markers" id="timeline-markers"></div>
+            <div class="timeline-age-labels" id="timeline-age-labels"></div>
+            <div class="timeline-milestone-dots" id="timeline-dots"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MILESTONE CARDS -->
+    <section id="section-goals" class="section">
+      <div class="section-header">
+        <h2 class="section-title">Milestones</h2>
+        <button class="btn-outline" onclick="clearAllMilestones()">Clear All</button>
+      </div>
+      <div class="milestones-grid" id="milestones-grid">
+        <div class="empty-state" id="empty-state">
+          <div class="empty-icon">🎯</div>
+          <p>No milestones yet. Add one from the sidebar or use a template.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSIGHT CARDS -->
+    <section class="section">
+      <div class="insights-grid">
+        <div class="insight-card" id="card-nextgoal">
+          <div class="insight-label">Next Goal</div>
+          <div class="insight-value" id="ig-nextgoal">—</div>
+          <div class="insight-sub" id="ig-nextgoal-sub">No upcoming milestones</div>
+        </div>
+        <div class="insight-card" id="card-highest">
+          <div class="insight-label">Highest Cost Goal</div>
+          <div class="insight-value" id="ig-highest">—</div>
+          <div class="insight-sub" id="ig-highest-sub">Add milestones to see</div>
+        </div>
+        <div class="insight-card" id="card-health">
+          <div class="insight-label">Plan Health</div>
+          <div class="insight-value" id="ig-health">—</div>
+          <div class="insight-sub" id="ig-health-sub">Add milestones to evaluate</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SMART INSIGHTS -->
+    <section class="section">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Smart Insights</h2>
+        </div>
+        <div id="smart-insights" class="insights-list">
+          <div class="insight-item neutral">📊 Add milestones and configure your profile to see smart insights.</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- MILESTONE DETAIL MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal()">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-header">
+      <div class="modal-icon" id="modal-icon"></div>
+      <div>
+        <h2 id="modal-title"></h2>
+        <p id="modal-cat" class="modal-cat"></p>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-stat-row">
+        <div class="modal-stat"><p class="ms-label">Target Age</p><p class="ms-val" id="modal-age"></p></div>
+        <div class="modal-stat"><p class="ms-label">Cost</p><p class="ms-val" id="modal-cost"></p></div>
+        <div class="modal-stat"><p class="ms-label">Status</p><p class="ms-val" id="modal-status"></p></div>
+        <div class="modal-stat"><p class="ms-label">Balance at Age</p><p class="ms-val" id="modal-balance"></p></div>
+      </div>
+      <p class="modal-insight" id="modal-insight"></p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-outline" onclick="deleteMilestoneFromModal()">Delete</button>
+      <button class="btn-primary" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

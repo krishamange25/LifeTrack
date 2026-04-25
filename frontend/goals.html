@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>LifeTrack — Goals</title>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body data-page="goals">
+
+<nav class="navbar">
+  <a class="nav-brand" href="index.html">
+    <div class="nav-logo-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+    <span class="nav-title">LifeTrack</span><span class="nav-tag">PS-09</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="dashboard.html">Dashboard</a>
+    <a class="nav-link active" href="goals.html">Goals</a>
+    <a class="nav-link" href="insights.html">Insights</a>
+  </div>
+  <div class="nav-right">
+    <div class="conn-badge offline"><span class="conn-dot"></span>Offline Mode</div>
+    <button class="nav-burger">☰</button>
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="layout">
+
+    <!-- SIDEBAR: ADD GOAL + TEMPLATES -->
+    <aside class="sidebar">
+
+      <!-- ADD GOAL FORM -->
+      <div class="card">
+        <div class="card-header"><div class="card-title">➕ Add Goal</div></div>
+        <div class="form-group"><label class="form-label">Title</label><input id="g-title" class="form-input" placeholder="Buy a House"/></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Target Age</label><input id="g-age" type="number" class="form-input" placeholder="35" min="20" max="80"/></div>
+          <div class="form-group"><label class="form-label">Cost (₹)</label><input id="g-cost" type="number" class="form-input" placeholder="7500000"/></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Category</label>
+          <select id="g-cat" class="form-input">
+            <option value="House">🏠 House</option>
+            <option value="Vehicle">🚗 Vehicle</option>
+            <option value="Business">💼 Business</option>
+            <option value="Education">🎓 Education</option>
+            <option value="Health">❤️ Health</option>
+            <option value="Travel">✈️ Travel</option>
+            <option value="Family">👨‍👩‍👧 Family</option>
+            <option value="Security">🛡️ Security</option>
+          </select>
+        </div>
+        <button class="btn btn-primary btn-full" id="add-goal-btn">Add Goal</button>
+      </div>
+
+      <!-- TEMPLATES -->
+      <div class="card">
+        <div class="card-header"><div class="card-title">⭐ Templates</div></div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <button class="btn btn-outline tpl-btn" data-title="Buy Apartment" data-age="35" data-cost="7500000" data-cat="House">🏠 Buy Apartment</button>
+          <button class="btn btn-outline tpl-btn" data-title="Start Business" data-age="38" data-cost="3000000" data-cat="Business">💼 Start Business</button>
+          <button class="btn btn-outline tpl-btn" data-title="Higher Studies" data-age="26" data-cost="1500000" data-cat="Education">🎓 Higher Studies</button>
+          <button class="btn btn-outline tpl-btn" data-title="Emergency Fund" data-age="30" data-cost="500000" data-cat="Security">🛡️ Emergency Fund</button>
+          <button class="btn btn-outline tpl-btn" data-title="Dream Trip" data-age="32" data-cost="300000" data-cat="Travel">✈️ Dream Trip</button>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main">
+
+      <!-- TIMELINE -->
+      <div class="card">
+        <div class="card-header">
+          <div><div class="card-title">Life Timeline</div><div class="card-sub">Age 20 – 80 · 🟢 On Track · 🟡 Close · 🔴 At Risk</div></div>
+        </div>
+        <div class="tl-wrap">
+          <div class="tl-track">
+            <div class="tl-bar"></div>
+            <div class="tl-ages">
+              <span>20</span><span>30</span><span>40</span><span>50</span><span>60</span><span>70</span><span>80</span>
+            </div>
+            <div class="tl-dots" id="tl-dots"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GOAL CARDS -->
+      <div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+          <div style="font-size:1rem;font-weight:700">My Goals</div>
+          <button class="btn btn-sm" style="background:var(--rose-l);color:var(--rose);border:none" onclick="clearGoals()">Clear All</button>
+        </div>
+        <div class="goals-grid" id="goals-grid">
+          <div class="empty-state"><div class="ei">🎯</div><p>No goals yet. Add one from the sidebar or use a template.</p></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+async function clearGoals(){
+  if(!confirm('Clear all goals?'))return;
+  const goals=await loadGoals();
+  await Promise.all(goals.map(g=>deleteGoal(g.id)));
+  showToast('All goals cleared');
+  initGoals();
+}
+</script>
+</body>
+</html>
