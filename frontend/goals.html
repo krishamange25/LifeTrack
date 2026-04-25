@@ -17,6 +17,7 @@
     <a class="nav-link" href="dashboard.html">Dashboard</a>
     <a class="nav-link active" href="goals.html">Goals</a>
     <a class="nav-link" href="insights.html">Insights</a>
+    <a class="nav-link" href="learning.html">Learning</a>
   </div>
   <div class="nav-right">
     <div class="conn-badge offline"><span class="conn-dot"></span>Offline Mode</div>
@@ -24,23 +25,27 @@
   </div>
 </nav>
 
-<div class="page">
+<div class="page slide-stack">
+  
+  <div class="slide-item" style="background:transparent; margin-bottom: 24px; display:flex; align-items:center; padding: 40px; background:white; border-radius:var(--radius); box-shadow:var(--shadow-md);">
+    <img src="assets/goals.png" alt="Trophy 3D" style="width:140px; height:140px; margin-right:40px; filter: drop-shadow(0 20px 40px rgba(16,185,129,0.15));">
+    <div>
+      <h1 style="font-size:2.4rem; font-weight:900; letter-spacing:-0.5px;">Your Life Milestones</h1>
+      <p style="color:var(--muted); font-size:1.1rem; margin-top:8px;">Plan your future, one goal at a time. Track progress and stay on target.</p>
+    </div>
+  </div>
 
-  <div class="layout">
-
+  <div class="layout slide-item">
     <!-- SIDEBAR: ADD GOAL + TEMPLATES -->
-    <aside class="sidebar">
-
-      <!-- ADD GOAL FORM -->
-      <div class="card">
+    <aside class="sidebar reveal-right stagger-1">
+      <div class="card" style="margin-bottom:20px">
         <div class="card-header"><div class="card-title">➕ Add Goal</div></div>
         <div class="form-group"><label class="form-label">Title</label><input id="g-title" class="form-input" placeholder="Buy a House"/></div>
         <div class="form-row">
           <div class="form-group"><label class="form-label">Target Age</label><input id="g-age" type="number" class="form-input" placeholder="35" min="20" max="80"/></div>
           <div class="form-group"><label class="form-label">Cost (₹)</label><input id="g-cost" type="number" class="form-input" placeholder="7500000"/></div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Category</label>
+        <div class="form-group"><label class="form-label">Category</label>
           <select id="g-cat" class="form-input">
             <option value="House">🏠 House</option>
             <option value="Vehicle">🚗 Vehicle</option>
@@ -55,52 +60,36 @@
         <button class="btn btn-primary btn-full" id="add-goal-btn">Add Goal</button>
       </div>
 
-      <!-- TEMPLATES -->
       <div class="card">
         <div class="card-header"><div class="card-title">⭐ Templates</div></div>
         <div style="display:flex;flex-direction:column;gap:8px">
           <button class="btn btn-outline tpl-btn" data-title="Buy Apartment" data-age="35" data-cost="7500000" data-cat="House">🏠 Buy Apartment</button>
           <button class="btn btn-outline tpl-btn" data-title="Start Business" data-age="38" data-cost="3000000" data-cat="Business">💼 Start Business</button>
           <button class="btn btn-outline tpl-btn" data-title="Higher Studies" data-age="26" data-cost="1500000" data-cat="Education">🎓 Higher Studies</button>
-          <button class="btn btn-outline tpl-btn" data-title="Emergency Fund" data-age="30" data-cost="500000" data-cat="Security">🛡️ Emergency Fund</button>
-          <button class="btn btn-outline tpl-btn" data-title="Dream Trip" data-age="32" data-cost="300000" data-cat="Travel">✈️ Dream Trip</button>
         </div>
       </div>
-
     </aside>
 
     <!-- MAIN -->
     <div class="main">
-
-      <!-- TIMELINE -->
-      <div class="card">
-        <div class="card-header">
-          <div><div class="card-title">Life Timeline</div><div class="card-sub">Age 20 – 80 · 🟢 On Track · 🟡 Close · 🔴 At Risk</div></div>
-        </div>
-        <div class="tl-wrap">
-          <div class="tl-track">
-            <div class="tl-bar"></div>
-            <div class="tl-ages">
-              <span>20</span><span>30</span><span>40</span><span>50</span><span>60</span><span>70</span><span>80</span>
-            </div>
-            <div class="tl-dots" id="tl-dots"></div>
-          </div>
-        </div>
+      <div class="card reveal-right stagger-2">
+        <div class="card-header"><div><div class="card-title">Life Timeline</div><div class="card-sub">Age 20 – 80 · Feasibility heatmap</div></div></div>
+        <div class="tl-wrap"><div class="tl-track"><div class="tl-bar"></div><div class="tl-ages"><span>20</span><span>30</span><span>40</span><span>50</span><span>60</span><span>70</span><span>80</span></div><div class="tl-dots" id="tl-dots"></div></div></div>
       </div>
-
-      <!-- GOAL CARDS -->
-      <div>
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
-          <div style="font-size:1rem;font-weight:700">My Goals</div>
-          <button class="btn btn-sm" style="background:var(--rose-l);color:var(--rose);border:none" onclick="clearGoals()">Clear All</button>
-        </div>
-        <div class="goals-grid" id="goals-grid">
-          <div class="empty-state"><div class="ei">🎯</div><p>No goals yet. Add one from the sidebar or use a template.</p></div>
-        </div>
-      </div>
-
     </div>
   </div>
+
+  <!-- GOAL CARDS SLIDE -->
+  <div class="slide-item">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+      <div style="font-size:1.1rem;font-weight:800">My Goals</div>
+      <button class="btn btn-sm btn-outline" style="border-color:var(--rose-m); color:var(--rose)" onclick="clearGoals()">Clear All</button>
+    </div>
+    <div class="goals-grid" id="goals-grid">
+      <!-- Injected -->
+    </div>
+  </div>
+
 </div>
 
 <script src="script.js"></script>

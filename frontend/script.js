@@ -283,6 +283,155 @@ function initNavbar(){
   document.querySelector('.nav-burger')?.addEventListener('click',()=>{
     document.querySelector('.nav-links')?.classList.toggle('open');
   });
+  
+  // Initialize animations
+  initAnimations();
+}
+
+function initAnimations() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        if (entry.target.classList.contains('stat-card')) {
+          const valEl = entry.target.querySelector('.stat-val');
+          if (valEl && !valEl.dataset.animated) animateCounter(valEl);
+        }
+      }
+    });
+  }, { threshold: 0.1 });
+
+  const elements = document.querySelectorAll('.page, .page-narrow, .ob-wrap, .card, .stat-card, .welcome-card, .goal-card, .insight-item, .hero h1, .hero p, .step-card, .ob-card, .sidebar, .reveal-right, .slide-item');
+  elements.forEach((el, i) => {
+    if (!el.classList.contains('reveal') && !el.classList.contains('reveal-right') && !el.classList.contains('slide-item')) {
+      el.classList.add('reveal');
+      el.classList.add(`stagger-${(i % 5) + 1}`);
+    }
+    observer.observe(el);
+    
+    // Premium Tilt effect for cards
+    const isInteractive = el.classList.contains('card') || el.classList.contains('stat-card') || el.classList.contains('goal-card') || el.classList.contains('ob-card');
+    if (isInteractive) {
+      el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const xc = rect.width / 2;
+        const yc = rect.height / 2;
+        const dx = x - xc;
+        const dy = y - yc;
+        el.style.transform = `translateY(-10px) rotateY(${dx / 25}deg) rotateX(${-dy / 25}deg) scale(1.02)`;
+        el.style.transition = 'transform 0.1s ease-out';
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.transform = '';
+        el.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+      });
+    }
+  });
+}
+
+function animateCounter(el) {
+  const text = el.textContent;
+  const match = text.match(/[\d,.]+/);
+  if (!match) return;
+  
+  const target = parseFloat(match[0].replace(/,/g, ''));
+  const prefix = text.substring(0, match.index);
+  const suffix = text.substring(match.index + match[0].length);
+  
+  let current = 0;
+  const duration = 1500;
+  const start = performance.now();
+  
+  el.dataset.animated = "true";
+  
+  function step(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+    const val = current + (target - current) * eased;
+    
+    el.textContent = prefix + (val >= 100000 ? (val / 100000).toFixed(1) + 'L' : Math.floor(val).toLocaleString('en-IN')) + suffix;
+    
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = text; // ensure final text is exact
+  }
+  requestAnimationFrame(step);
+}
+
+/* ── SIP CALCULATOR ── */
+function runSipCalc() {
+  const p = parseFloat(document.getElementById('sip-amount')?.value) || 0;
+  const r = parseFloat(document.getElementById('sip-return')?.value) || 0;
+  const n = parseFloat(document.getElementById('sip-years')?.value) || 0;
+  
+  if (p <= 0 || n <= 0) return;
+
+  const monthlyRate = r / 12 / 100;
+  const months = n * 12;
+  
+  // SIP Formula: M = P × ({[1 + i]^n – 1} / i) × (1 + i)
+  const maturity = p * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate);
+  const invested = p * months;
+  const gain = maturity - invested;
+
+  const resEl = document.getElementById('sip-result');
+  const gainEl = document.getElementById('sip-gain');
+  
+  if (resEl) resEl.textContent = fmt(Math.round(maturity));
+  if (gainEl) gainEl.textContent = fmt(Math.round(gain));
+}
+
+const MARKET_FALLBACK = [
+  { name: 'NIFTYBEES', price: 271.09, change: -0.98, logo: 'NB', color: '#B91C1C', bg: '#FEE2E2' },
+  { name: 'TATAGOLD',  price: 14.54,  change: -0.07, logo: 'TG', color: '#0369A1', bg: '#E0F2FE' },
+  { name: 'MON100',    price: 293.13, change: 1.12, logo: 'MN', color: '#047857', bg: '#ECFDF5' },
+  { name: 'MAFANG',    price: 179.70, change: 3.38, logo: 'MA', color: '#6D28D9', bg: '#F5F3FF' },
+  { name: 'TATASTEEL', price: 210.07, change: -0.40, logo: 'TS', color: '#C2410C', bg: '#FFF7ED' },
+  { name: 'GROWW',     price: 218.02, change: 0.13, logo: 'GW', color: '#15803D', bg: '#F0FDF4' }
+];
+
+/* ── MARKET FEED ── */
+async function initMarketFeed() {
+  const listEl = document.getElementById('market-list');
+  if (!listEl) return;
+
+  const fetchMarket = async () => {
+    try {
+      const res = await fetch(`${API}/market`);
+      if (!res.ok) throw new Error();
+      const data = await res.json();
+      renderMarket(data);
+    } catch {
+      // Fallback to static real data if backend is offline or CORS blocked
+      renderMarket(MARKET_FALLBACK, true);
+    }
+  };
+
+  const renderMarket = (data, isFallback = false) => {
+    let html = data.map(item => `
+      <div class="market-item">
+        <div class="market-left">
+          <div class="market-logo" style="background:${item.bg}; color:${item.color}">${item.logo}</div>
+          <div class="market-name">${item.name}</div>
+        </div>
+        <div class="market-right">
+          <div class="market-price">₹${item.price}</div>
+          <div class="market-trend ${item.change >= 0 ? 'trend-up' : 'trend-down'}">
+            ${item.change >= 0 ? '+' : ''}${item.change}%
+          </div>
+        </div>
+      </div>
+    `).join('');
+    
+    if (isFallback) {
+      html = '<div class="insight-item neutral" style="font-size:0.7rem; padding:4px 8px; margin-bottom:8px">💡 Showing daily market snapshot (Live Feed Offline)</div>' + html;
+    }
+    listEl.innerHTML = html;
+  };
+
+  fetchMarket();
+  setInterval(fetchMarket, 5000); // Polling every 5s for "live" feel
 }
 
 /* ── BOOT ─── */
@@ -431,6 +580,8 @@ async function initDashboard(){
     saveSettings(settings);
   }
   refresh();
+  runSipCalc();
+  initMarketFeed();
 }
 function renderInsights(goals,pts,dds,settings){
   const box=document.getElementById('insight-box');if(!box)return;

@@ -17,6 +17,7 @@
     <a class="nav-link" href="dashboard.html">Dashboard</a>
     <a class="nav-link" href="goals.html">Goals</a>
     <a class="nav-link active" href="insights.html">Insights</a>
+    <a class="nav-link" href="learning.html">Learning</a>
   </div>
   <div class="nav-right">
     <div class="conn-badge offline"><span class="conn-dot"></span>Offline Mode</div>
@@ -24,72 +25,62 @@
   </div>
 </nav>
 
-<div class="page-narrow">
+<div class="page-narrow slide-stack">
 
-  <div style="margin-bottom:28px">
+  <div class="slide-item" style="background:transparent">
     <h1 style="font-size:1.8rem;font-weight:800;letter-spacing:-.5px">Smart Financial Insights</h1>
     <p style="color:#6B7280;margin-top:6px">Deep analysis of your financial profile and goal feasibility</p>
   </div>
 
   <!-- ROW 1: Personality + Score -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
-
-    <!-- PERSONALITY -->
-    <div class="card">
+  <div class="slide-item" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+    <div class="card reveal-right stagger-1">
       <div class="card-title" style="margin-bottom:16px">🎭 Financial Personality</div>
       <div id="ins-personality" class="personality-badge saver" style="margin-bottom:16px">—</div>
       <div style="font-size:.82rem;color:#6B7280;margin-top:8px" id="personality-desc">Complete onboarding to see your financial personality.</div>
     </div>
 
-    <!-- DISCIPLINE SCORE -->
-    <div class="card">
+    <div class="card reveal-right stagger-2">
       <div class="card-title" style="margin-bottom:16px">📊 Discipline Score</div>
       <div style="font-size:2rem;font-weight:900;color:#1A1D2E" id="ins-score-val">—/100</div>
       <div class="score-bar-wrap"><div class="score-bar indigo" id="ins-score-bar" style="width:0%"></div></div>
-      <div style="font-size:.78rem;color:#6B7280;margin-top:6px">Based on savings ratio, emergency fund, and financial habits</div>
+      <div style="font-size:.78rem;color:#6B7280;margin-top:6px">Based on savings ratio, emergency fund, and habits</div>
     </div>
-
   </div>
 
   <!-- ROW 2: Emergency + Awareness -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
-
-    <div class="card">
+  <div class="slide-item" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+    <div class="card reveal-right stagger-3">
       <div class="card-title" style="margin-bottom:12px">🛡️ Emergency Readiness</div>
       <div style="font-size:1.3rem;font-weight:800" id="ins-emergency">—</div>
-      <div style="font-size:.8rem;color:#6B7280;margin-top:6px">Based on months of income covered by emergency fund</div>
+      <div style="font-size:.8rem;color:#6B7280;margin-top:6px">Months of income covered</div>
     </div>
 
-    <div class="card">
+    <div class="card reveal-right stagger-4">
       <div class="card-title" style="margin-bottom:12px">📈 Investment Awareness</div>
       <div style="font-size:1.3rem;font-weight:800" id="ins-awareness">—</div>
-      <div style="font-size:.8rem;color:#6B7280;margin-top:6px">Based on app usage, tracking habits, and investment behaviour</div>
+      <div style="font-size:.8rem;color:#6B7280;margin-top:6px">Tracking and investment behaviour</div>
     </div>
-
   </div>
 
   <!-- GOAL CONFLICT -->
-  <div class="card" style="margin-bottom:20px">
-    <div class="card-header"><div><div class="card-title">⚔️ Goal Conflict Detection</div><div class="card-sub">Are your goals financially compatible?</div></div></div>
-    <div id="ins-conflicts"><div class="insight-item neutral">Add goals to check for conflicts.</div></div>
-  </div>
-
-  <!-- LIFESTYLE PROJECTION -->
-  <div class="card" style="margin-bottom:20px">
-    <div class="card-header"><div><div class="card-title">🗓️ Lifestyle Projection</div><div class="card-sub">Goal feasibility across your life timeline</div></div></div>
-    <div id="ins-lifestyle" style="display:flex;flex-wrap:wrap;gap:8px">
-      <span class="insight-item neutral">Add goals to see your lifestyle projection.</span>
+  <div class="slide-item">
+    <div class="card reveal-right">
+      <div class="card-header"><div><div class="card-title">⚔️ Goal Conflict Detection</div><div class="card-sub">Are your goals financially compatible?</div></div></div>
+      <div id="ins-conflicts"><div class="insight-item neutral">Add goals to check for conflicts.</div></div>
     </div>
   </div>
 
   <!-- SUGGESTIONS -->
-  <div class="card" style="margin-bottom:20px">
-    <div class="card-header"><div><div class="card-title">💡 Personalised Suggestions</div><div class="card-sub">Action items to improve your financial plan</div></div></div>
-    <div id="ins-suggestions"><div class="insight-item neutral">Complete onboarding and add goals to see suggestions.</div></div>
+  <div class="slide-item">
+    <div class="card reveal-right">
+      <div class="card-header"><div><div class="card-title">💡 Personalised Suggestions</div><div class="card-sub">Action items to improve your plan</div></div></div>
+      <div id="ins-suggestions"><div class="insight-item neutral">Complete onboarding to see suggestions.</div></div>
+    </div>
   </div>
 
   <!-- BACK TO DASHBOARD -->
-  <div style="text-align:center;padding-bottom:40px">
+  <div class="slide-item" style="text-align:center; background:transparent">
     <a class="btn btn-primary" href="dashboard.html">← Back to Dashboard</a>
   </div>
 
@@ -97,8 +88,7 @@
 
 <script src="script.js"></script>
 <script>
-// Update personality descriptions
-const descs={Saver:'You prioritise saving over spending. You have good financial discipline and tend to build wealth steadily.',Investor:'You focus on growing wealth through investments. You have high financial awareness and take calculated risks.',Spender:'You tend to spend before saving. Consider automating savings to build long-term wealth.'};
+const descs={Saver:'You prioritise saving over spending.',Investor:'You focus on growing wealth through investments.',Spender:'You tend to spend before saving.'};
 document.addEventListener('DOMContentLoaded',()=>{
   setTimeout(()=>{
     const el=document.getElementById('ins-personality');

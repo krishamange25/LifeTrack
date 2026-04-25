@@ -102,4 +102,25 @@ app.get('/api/insights', (_,res) => {
   res.json({ score, personality, emergency, awareness, suggestions, totalGoals: goals.length });
 });
 
+/* ── MARKET DATA (Mock Live Feed from Real Base Prices) ── */
+const BASE_MARKET = {
+  NIFTYBEES: { name: 'NIFTYBEES', price: 271.09, change: -0.98, logo: 'NB', color: '#B91C1C', bg: '#FEE2E2' },
+  TATAGOLD:  { name: 'TATAGOLD',  price: 14.54,  change: -0.07, logo: 'TG', color: '#0369A1', bg: '#E0F2FE' },
+  MON100:    { name: 'Motilal-NASDAQ', price: 293.13, change: 1.12, logo: 'MN', color: '#047857', bg: '#ECFDF5' },
+  MAFANG:    { name: 'Mirae Asset FANG+', price: 179.70, change: 3.38, logo: 'MA', color: '#6D28D9', bg: '#F5F3FF' },
+  TATASTEEL: { name: 'Tata Steel', price: 210.07, change: -0.40, logo: 'TS', color: '#C2410C', bg: '#FFF7ED' },
+  GROWW:     { name: 'Groww Nifty 50', price: 218.02, change: 0.13, logo: 'GW', color: '#15803D', bg: '#F0FDF4' }
+};
+
+app.get('/api/market', (req, res) => {
+  // Simulate live fluctuations ±0.02%
+  const liveData = Object.keys(BASE_MARKET).map(key => {
+    const item = { ...BASE_MARKET[key] };
+    const jitter = 1 + (Math.random() * 0.0004 - 0.0002);
+    item.price = parseFloat((item.price * jitter).toFixed(2));
+    return item;
+  });
+  res.json(liveData);
+});
+
 app.listen(PORT, () => console.log(`LifeTrack backend running on http://localhost:${PORT}`));

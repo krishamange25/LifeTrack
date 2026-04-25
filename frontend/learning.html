@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>LifeTrack — Learning Center</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+    margin-top: 24px;
+  }
+  .video-card {
+    background: var(--white);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.3s var(--ease-elastic);
+  }
+  .video-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-lg);
+  }
+  .thumb-wrap {
+    position: relative;
+    padding-top: 56.25%; /* 16:9 */
+    background: #000;
+  }
+  .thumb-wrap iframe {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    border: none;
+  }
+  .video-info {
+    padding: 20px;
+  }
+  .video-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--text);
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .video-tag {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--indigo);
+    background: var(--indigo-l);
+    padding: 4px 10px;
+    border-radius: 99px;
+    display: inline-block;
+  }
+</style>
+</head>
+<body data-page="learning">
+
+<nav class="navbar">
+  <a class="nav-brand" href="index.html">
+    <div class="nav-logo-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+    <span class="nav-title">LifeTrack</span><span class="nav-tag">PS-09</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="dashboard.html">Dashboard</a>
+    <a class="nav-link" href="goals.html">Goals</a>
+    <a class="nav-link" href="insights.html">Insights</a>
+    <a class="nav-link active" href="learning.html">Learning</a>
+  </div>
+  <div class="nav-right">
+    <div class="conn-badge offline"><span class="conn-dot"></span>Offline Mode</div>
+    <button class="nav-burger">☰</button>
+  </div>
+</nav>
+
+<div class="page-narrow slide-stack">
+  
+  <div class="slide-item" style="background:transparent; margin-bottom: 32px; display:grid; grid-template-columns: 1fr 300px; align-items:center; gap:40px;">
+    <div>
+      <h1 style="font-size:2.5rem; font-weight:900; letter-spacing:-0.5px; line-height:1.1;">Financial Learning Center</h1>
+      <p style="color:var(--muted); margin-top:16px; font-size:1.1rem;">Master SIPs, Stock Markets, and Goal Planning with curated expert guides.</p>
+    </div>
+    <div class="reveal-right">
+      <img src="assets/learning.png" alt="Learn 3D" style="width:100%; filter: drop-shadow(0 10px 20px rgba(79,70,229,0.15));">
+    </div>
+  </div>
+
+  <!-- VIDEO SECTION 1 -->
+  <div class="slide-item">
+    <div style="font-weight:800; font-size:1.1rem; margin-bottom:16px;">🎯 SIP & Goal Planning Essentials</div>
+    <div class="video-grid">
+      <div class="video-card reveal-right stagger-1">
+        <div class="thumb-wrap">
+          <iframe src="https://www.youtube.com/embed/1DRq8N7SpYc" allowfullscreen></iframe>
+        </div>
+        <div class="video-info">
+          <span class="video-tag">SIP Basics</span>
+          <div class="video-title">SIP KYA HAI? SIP vs LUMPSUM EXPLAINED! | Ankur Warikoo</div>
+        </div>
+      </div>
+      <div class="video-card reveal-right stagger-2">
+        <div class="thumb-wrap">
+          <iframe src="https://www.youtube.com/embed/SzgwRuKvC0c" allowfullscreen></iframe>
+        </div>
+        <div class="video-info">
+          <span class="video-tag">Goal Planning</span>
+          <div class="video-title">Financial Goal Setting - How to plan your journey | Ankur Warikoo</div>
+        </div>
+      </div>
+      <div class="video-card reveal-right stagger-3">
+        <div class="thumb-wrap">
+          <iframe src="https://www.youtube.com/embed/ZXLATRO3Ifw" allowfullscreen></iframe>
+        </div>
+        <div class="video-info">
+          <span class="video-tag">Mutual Funds</span>
+          <div class="video-title">How to Start SIP in Mutual Funds | Beginners Guide</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIDEO SECTION 2 -->
+  <div class="slide-item">
+    <div style="font-weight:800; font-size:1.1rem; margin-bottom:16px;">📈 Stock Market & Compounding</div>
+    <div class="video-grid">
+      <div class="video-card reveal-right stagger-1">
+        <div class="thumb-wrap">
+          <iframe src="https://www.youtube.com/embed/qZ0ykShuC3U" allowfullscreen></iframe>
+        </div>
+        <div class="video-info">
+          <span class="video-tag">Compounding</span>
+          <div class="video-title">Power of Compounding in Stock Market | Neeraj Joshi</div>
+        </div>
+      </div>
+      <div class="video-card reveal-right stagger-2">
+        <div class="thumb-wrap">
+          <iframe src="https://www.youtube.com/embed/3UF0ymVdYLA" allowfullscreen></iframe>
+        </div>
+        <div class="video-info">
+          <span class="video-tag">Stocks 101</span>
+          <div class="video-title">Stock Market For Beginners | How can Beginners Start Investing</div>
+        </div>
+      </div>
+      <div class="video-card reveal-right stagger-3">
+        <div class="thumb-wrap">
+          <iframe src="https://www.youtube.com/embed/Xn7KWR9EOGQ" allowfullscreen></iframe>
+        </div>
+        <div class="video-info">
+          <span class="video-tag">Full Course</span>
+          <div class="video-title">Basics of Stock Market For Beginners | CA Rachana Ranade</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-item" style="text-align:center; background:transparent; padding-bottom: 60px;">
+    <p style="color:var(--subtle); font-size:0.85rem;">Ready to apply what you've learned?</p>
+    <a class="btn btn-primary" href="dashboard.html" style="margin-top:16px;">Go to My Dashboard</a>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

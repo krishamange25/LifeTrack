@@ -32,6 +32,29 @@ function init() {
     updateProjection();
   });
   updateProjection();
+  initAnimations();
+}
+
+function initAnimations() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        // If it's a stat card, we could add a special pulse
+        if (entry.target.classList.contains('stat-card')) {
+          entry.target.style.animation = 'scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards';
+        }
+      }
+    });
+  }, { threshold: 0.1 });
+
+  // Apply reveal to all major cards and sections
+  document.querySelectorAll('.sidebar-card, .card, .stat-card, .insight-card, .section').forEach((el, i) => {
+    el.classList.add('reveal');
+    // Add staggered delay for initial viewport elements
+    if (i < 8) el.classList.add(`stagger-${(i % 4) + 1}`);
+    observer.observe(el);
+  });
 }
 
 function syncSliders() {
@@ -64,6 +87,16 @@ function updateSlider(key, val) {
   if (key === 'networth') { state.netWorth = val; document.getElementById('val-networth').textContent = fmt(val); setSliderFill('sl-networth', val, 0, 10000000); }
   if (key === 'return')   { state.annualReturn = val; document.getElementById('val-return').textContent = val + '%'; setSliderFill('sl-return', val, 1, 30); }
   if (key === 'inflation'){ state.inflationRate = val; document.getElementById('val-inflation').textContent = val + '%'; setSliderFill('sl-inflation', val, 1, 15); }
+  
+  // Subtle haptic-like animation for the value labels
+  const labelId = key === 'inflation' ? 'val-inflation' : `val-${key}`;
+  const label = document.getElementById(labelId);
+  if (label) {
+    label.style.transform = 'scale(1.2)';
+    label.style.transition = 'transform 0.1s';
+    setTimeout(() => { label.style.transform = 'scale(1)'; }, 100);
+  }
+
   updateProjection();
 }
 
@@ -258,7 +291,9 @@ function renderMilestoneCards(drawdowns) {
     const labels = { 'on-track': 'On Track', 'close': 'Close', 'at-risk': 'At Risk' };
 
     const card = document.createElement('div');
-    card.className = `milestone-card ${finalStatus}`;
+    card.className = `milestone-card ${finalStatus} reveal active`; // Active immediately as it's rendered by JS
+    card.style.animation = 'scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards';
+    card.style.animationDelay = (i * 0.05) + 's';
     card.innerHTML = `
       <button class="mc-delete" onclick="event.stopPropagation();deleteMilestone(${i})">✕</button>
       <div class="mc-top">

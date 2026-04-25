@@ -5,29 +5,35 @@
       "password": "123456789",
       "name": "Krisha",
       "id": "1777093990366"
+    },
+    {
+      "email": "meet@gmail.com",
+      "password": "123456789",
+      "name": "Meet ",
+      "id": "1777100809952"
     }
   ],
   "goals": [
     {
       "id": "1777094186390",
       "title": "Education",
-      "age": 23,
-      "cost": 1000000,
+      "age": 35,
+      "cost": 8790000,
       "category": "House"
     }
   ],
   "settings": {
-    "age": 28,
-    "savings": 15000,
+    "age": 21,
+    "savings": 1000,
     "netWorth": 200000,
     "ret": 10,
-    "inflOn": false,
+    "inflOn": true,
     "inflRate": 5
   },
   "user": {
-    "name": "Krisha",
-    "age": 19,
-    "city": "Mumbai",
+    "name": "",
+    "age": 0,
+    "city": "",
     "occupation": "Student",
     "income": 0,
     "expenses": 0,
@@ -41,7 +47,7 @@
     "hasEmergency": false,
     "emergencyMonths": 0,
     "mainGoal": "Buy a House",
-    "riskPref": "Growth",
+    "riskPref": "Safe",
     "priority": "High"
   }
 }
