@@ -20,12 +20,26 @@
       "age": 35,
       "cost": 8790000,
       "category": "House"
+    },
+    {
+      "id": "1777109094412",
+      "title": "study planning",
+      "age": 45,
+      "cost": 500000,
+      "category": "Education"
+    },
+    {
+      "id": "1777109150243",
+      "title": "ed",
+      "age": 35,
+      "cost": 50000,
+      "category": "Education"
     }
   ],
   "settings": {
-    "age": 21,
-    "savings": 1000,
-    "netWorth": 200000,
+    "age": 31,
+    "savings": 29000,
+    "netWorth": 0,
     "ret": 10,
     "inflOn": true,
     "inflRate": 5

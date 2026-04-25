@@ -434,6 +434,27 @@ async function initMarketFeed() {
   setInterval(fetchMarket, 5000); // Polling every 5s for "live" feel
 }
 
+/* ── NEWS FEED ── */
+async function initNewsFeed() {
+  const listEl = document.getElementById('news-feed');
+  if (!listEl) return;
+
+  try {
+    const res = await fetch(`${API}/news`);
+    const data = await res.json();
+    listEl.innerHTML = data.map(item => `
+      <a href="${item.link}" target="_blank" style="text-decoration:none; display:block">
+        <div class="insight-item neutral" style="cursor:pointer; margin-bottom:12px; transition:all 0.2s; border:1px solid transparent;" onmouseover="this.style.borderColor='var(--indigo-m)'; this.style.background='var(--indigo-l)'" onmouseout="this.style.borderColor='transparent'; this.style.background='var(--bg)'">
+          <div style="font-weight:700; color:var(--text); font-size:0.95rem; margin-bottom:4px">${item.title}</div>
+          <div style="font-size:0.8rem; color:var(--muted)">${item.summary}</div>
+        </div>
+      </a>
+    `).join('');
+  } catch {
+    listEl.innerHTML = '<div class="insight-item warn">⚠️ Failed to load latest news (Backend Offline)</div>';
+  }
+}
+
 /* ── BOOT ─── */
 window.addEventListener('DOMContentLoaded',()=>{
   initNavbar();
@@ -689,4 +710,5 @@ async function initInsights(){
   const lifeItems=goals.map(g=>{const st=goalStatus(g,dds,settings,pts);return`<span class="status-badge ${st}" style="margin:4px">${CAT_ICONS[g.category]||'📌'} ${g.title} @ ${g.age}</span>`;});
   lpEl.innerHTML=lifeItems.length?lifeItems.join(''):'<span class="insight-item neutral">Add goals to see lifestyle projection.</span>';
   document.getElementById('ins-suggestions').innerHTML=suggestions.map(s=>`<div class="insight-item ${s.cls}">${s.msg}</div>`).join('');
+  initNewsFeed();
 }

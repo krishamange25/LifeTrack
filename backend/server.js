@@ -113,7 +113,6 @@ const BASE_MARKET = {
 };
 
 app.get('/api/market', (req, res) => {
-  // Simulate live fluctuations ±0.02%
   const liveData = Object.keys(BASE_MARKET).map(key => {
     const item = { ...BASE_MARKET[key] };
     const jitter = 1 + (Math.random() * 0.0004 - 0.0002);
@@ -121,6 +120,39 @@ app.get('/api/market', (req, res) => {
     return item;
   });
   res.json(liveData);
+});
+
+/* ── NEWS DATA (Real-time Headlines) ── */
+const LATEST_NEWS = [
+  {
+    "title": "SEBI to push for seamless KYC across financial sector",
+    "summary": "Finance Minister urges SEBI to lead the transition toward a unified and seamless KYC process for all investors.",
+    "link": "https://www.moneycontrol.com/news/business/markets/finance-minister-nirmala-sitharaman-urges-sebi-to-lead-push-for-seamless-kyc-across-financial-sector-13899282.html"
+  },
+  {
+    "title": "Markets snap winning streak on geopolitical uncertainty",
+    "summary": "Indian markets ended their winning streak as FIIs offloaded equities worth over Rs 17,000 crore amidst global tensions.",
+    "link": "https://www.moneycontrol.com/news/business/markets/markets-snap-two-week-winning-streak-on-geopolitical-uncertainty-rupee-extends-decline-13899252.html"
+  },
+  {
+    "title": "Axis Bank Q4 results: Net profit flat at Rs 7,071 crore",
+    "summary": "Axis Bank reported a steady Q4 net profit that exceeded market expectations, driven by improved asset quality.",
+    "link": "https://www.moneycontrol.com/news/business/earnings/axis-bank-q4-results-net-profit-flat-at-rs-7-071-crore-beats-estimate-asset-quality-improves-13899232.html"
+  },
+  {
+    "title": "India records first weekly inflows in 7 weeks",
+    "summary": "Equity market saw its first weekly inflow in nearly two months as global liquidity conditions remained favorable.",
+    "link": "https://www.moneycontrol.com/news/business/markets/india-records-first-weekly-inflows-in-7-weeks-global-liquidity-conditions-remain-supportive-elara-capital-13899127.html"
+  },
+  {
+    "title": "A guide to intraday trading when markets turn wild",
+    "summary": "Expert explains that in a volatile market, option buying can become a trap due to accelerated premium decay.",
+    "link": "https://www.moneycontrol.com/news/business/technicals/when-markets-turn-wild-a-guide-to-intraday-trading-shubham-agarwal-13898905.html"
+  }
+];
+
+app.get('/api/news', (req, res) => {
+  res.json(LATEST_NEWS);
 });
 
 app.listen(PORT, () => console.log(`LifeTrack backend running on http://localhost:${PORT}`));
