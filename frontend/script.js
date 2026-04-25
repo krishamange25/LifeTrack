@@ -429,12 +429,12 @@ function runSipCalc() {
 }
 
 const MARKET_FALLBACK = [
-  { name: 'NIFTYBEES', price: 271.09, change: -0.98, logo: 'NB', color: '#B91C1C', bg: '#FEE2E2' },
-  { name: 'TATAGOLD',  price: 14.54,  change: -0.07, logo: 'TG', color: '#0369A1', bg: '#E0F2FE' },
-  { name: 'MON100',    price: 293.13, change: 1.12, logo: 'MN', color: '#047857', bg: '#ECFDF5' },
-  { name: 'MAFANG',    price: 179.70, change: 3.38, logo: 'MA', color: '#6D28D9', bg: '#F5F3FF' },
-  { name: 'TATASTEEL', price: 210.07, change: -0.40, logo: 'TS', color: '#C2410C', bg: '#FFF7ED' },
-  { name: 'GROWW',     price: 218.02, change: 0.13, logo: 'GW', color: '#15803D', bg: '#F0FDF4' }
+  { name: 'SBI Gold Direct',    price: 45.77,  change: -0.16, logo: 'SBI', color: '#B91C1C', bg: '#FEE2E2' },
+  { name: 'Bandhan Small Cap',  price: 51.60,  change: -0.83, logo: 'B',   color: '#0369A1', bg: '#E0F2FE' },
+  { name: 'Parag Parikh Flexi', price: 90.56,  change: -0.57, logo: 'PP',  color: '#047857', bg: '#ECFDF5' },
+  { name: 'Motilal Oswal Mid',  price: 104.78, change: -1.57, logo: 'MO',  color: '#6D28D9', bg: '#F5F3FF' },
+  { name: 'HDFC Mid Cap',       price: 156.40, change: 0.45,  logo: 'H',   color: '#C2410C', bg: '#FFF7ED' },
+  { name: 'Quant Small Cap',    price: 245.12, change: 1.12,  logo: 'Q',   color: '#15803D', bg: '#F0FDF4' }
 ];
 
 /* ── MARKET FEED ── */
