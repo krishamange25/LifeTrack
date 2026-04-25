@@ -120,10 +120,14 @@ function buildProjection(settings,goals){
   const netR=inflOn?(1+ret/100)/(1+inflRate/100)-1:ret/100;
   const mr=netR/12;
   let bal=netWorth;
+  let totalInv=netWorth;
   const pts=[],dds=[];
   const sorted=[...goals].sort((a,b)=>a.age-b.age);
   for(let age=startAge;age<=80;age++){
-    for(let m=0;m<12;m++)bal=bal*(1+mr)+savings;
+    for(let m=0;m<12;m++) {
+      bal=bal*(1+mr)+savings;
+      totalInv += savings;
+    }
     sorted.forEach(g=>{
       if(g.age===age){
         const cost=inflOn?g.cost*Math.pow(1+inflRate/100,age-startAge):g.cost;
@@ -131,7 +135,7 @@ function buildProjection(settings,goals){
         if(bal>=cost)bal-=cost;
       }
     });
-    pts.push({age,bal:Math.max(0,bal)});
+    pts.push({age,bal:Math.max(0,bal),inv:totalInv});
   }
   return{pts,dds};
 }
@@ -187,25 +191,65 @@ function drawChart(canvasId,pts,dds,zoom,startAge){
   const xS=a=>pad.l+((a-minA)/(maxA-minA||1))*(W-pad.l-pad.r);
   const yS=v=>H-pad.b-(v/maxB)*(H-pad.t-pad.b);
   ctx.clearRect(0,0,W,H);
-  for(let i=0;i<=4;i++){
-    const y=pad.t+((H-pad.t-pad.b)/4)*i;
+  // Draw Y-axis grid & labels (increase granularity to 6 levels)
+  for(let i=0;i<=6;i++){
+    const y=pad.t+((H-pad.t-pad.b)/6)*i;
     ctx.strokeStyle='#F3F4F6';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();
     ctx.fillStyle='#9CA3AF';ctx.font='600 10px Inter';ctx.textAlign='right';
-    ctx.fillText(fmt(maxB*(1-i/4)),pad.l-5,y+4);
+    ctx.fillText(fmt(maxB*(1-i/6)),pad.l-8,y+4);
   }
-  vp.filter((_,i)=>i%5===0).forEach(p=>{
+  // Draw X-axis labels (increase granularity to every 2 years)
+  vp.filter((_,i)=>i%2===0).forEach(p=>{
     ctx.fillStyle='#9CA3AF';ctx.font='600 10px Inter';ctx.textAlign='center';
-    ctx.fillText(p.age,xS(p.age),H-pad.b+14);
+    ctx.fillText(p.age,xS(p.age),H-pad.b+16);
   });
+  // 1. Draw Investment Line (Secondary)
+  ctx.setLineDash([5, 5]);
+  ctx.beginPath();ctx.strokeStyle='#94A3B8';ctx.lineWidth=1.5;
+  vp.forEach((p,i)=>i?ctx.lineTo(xS(p.age),yS(p.inv)):ctx.moveTo(xS(p.age),yS(p.inv)));
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // 2. Main Wealth Area
   const g=ctx.createLinearGradient(0,pad.t,0,H-pad.b);
   g.addColorStop(0,'rgba(79,70,229,.15)');g.addColorStop(1,'rgba(79,70,229,0)');
   ctx.beginPath();ctx.moveTo(xS(vp[0].age),H-pad.b);
   vp.forEach(p=>ctx.lineTo(xS(p.age),yS(p.bal)));
   ctx.lineTo(xS(vp[vp.length-1].age),H-pad.b);ctx.closePath();
   ctx.fillStyle=g;ctx.fill();
+
+  // 3. Main Wealth Line
   ctx.beginPath();ctx.strokeStyle='#4F46E5';ctx.lineWidth=2.5;ctx.lineJoin='round';
   vp.forEach((p,i)=>i?ctx.lineTo(xS(p.age),yS(p.bal)):ctx.moveTo(xS(p.age),yS(p.bal)));
   ctx.stroke();
+
+  // 4. Final Labels
+  const lastP = vp[vp.length-1];
+  const finalX = xS(lastP.age);
+  const finalY = yS(lastP.bal);
+  const finalInvY = yS(lastP.inv);
+  
+  // Vertical Guide Line at end
+  ctx.setLineDash([5, 5]); ctx.strokeStyle = 'rgba(79,70,229,0.2)'; ctx.beginPath(); ctx.moveTo(finalX, pad.t); ctx.lineTo(finalX, H - pad.b); ctx.stroke(); ctx.setLineDash([]);
+
+  // Dots
+  ctx.shadowBlur = 10; ctx.shadowColor = 'rgba(79,70,229,0.3)';
+  ctx.fillStyle = '#4F46E5'; ctx.beginPath(); ctx.arc(finalX, finalY, 5, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#94A3B8'; ctx.beginPath(); ctx.arc(finalX, finalInvY, 4, 0, Math.PI*2); ctx.fill();
+  ctx.shadowBlur = 0;
+  
+  // Text Label: Wealth
+  ctx.fillStyle = '#4F46E5'; ctx.font = '800 13px Inter'; ctx.textAlign = 'right';
+  ctx.fillText(fmt(lastP.bal), finalX - 8, finalY - 12);
+  ctx.fillStyle = '#9CA3AF'; ctx.font = '700 9px Inter'; ctx.textAlign = 'right';
+  ctx.fillText('ESTIMATED CORPUS', finalX - 8, finalY - 28);
+
+  // Text Label: Invested
+  ctx.fillStyle = '#94A3B8'; ctx.font = '800 11px Inter'; ctx.textAlign = 'right';
+  ctx.fillText(fmt(lastP.inv), finalX - 8, finalInvY + 15);
+  ctx.font = '700 8px Inter';
+  ctx.fillText('TOTAL INVESTED', finalX - 8, finalInvY + 28);
+
   dds.filter(d=>d.age>=minA&&d.age<=maxA).forEach(d=>{
     const pt=vp.find(p=>p.age===d.age);if(!pt)return;
     ctx.beginPath();ctx.arc(xS(d.age),yS(pt.bal),6,0,Math.PI*2);
@@ -377,9 +421,11 @@ function runSipCalc() {
 
   const resEl = document.getElementById('sip-result');
   const gainEl = document.getElementById('sip-gain');
+  const invEl = document.getElementById('sip-invested');
   
   if (resEl) resEl.textContent = fmt(Math.round(maturity));
   if (gainEl) gainEl.textContent = fmt(Math.round(gain));
+  if (invEl) invEl.textContent = fmt(Math.round(invested));
 }
 
 const MARKET_FALLBACK = [

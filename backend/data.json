@@ -34,34 +34,41 @@
       "age": 35,
       "cost": 50000,
       "category": "Education"
+    },
+    {
+      "id": "1777109888176",
+      "title": "Travel",
+      "age": 25,
+      "cost": 10000,
+      "category": "Travel"
     }
   ],
   "settings": {
-    "age": 31,
-    "savings": 29000,
+    "age": 20,
+    "savings": 1000,
     "netWorth": 0,
-    "ret": 10,
+    "ret": 16,
     "inflOn": true,
     "inflRate": 5
   },
   "user": {
-    "name": "",
-    "age": 0,
-    "city": "",
+    "name": "Krisha ",
+    "age": 19,
+    "city": "Mumbai",
     "occupation": "Student",
-    "income": 0,
-    "expenses": 0,
-    "netWorth": 0,
-    "savings": 0,
+    "income": 10000,
+    "expenses": 1000,
+    "netWorth": 10000,
+    "savings": 1000,
     "tracksFinance": false,
     "hasApp": false,
     "checkFreq": "Weekly",
     "savesFirst": false,
     "extraAction": "Save",
     "hasEmergency": false,
-    "emergencyMonths": 0,
+    "emergencyMonths": 1,
     "mainGoal": "Buy a House",
-    "riskPref": "Safe",
+    "riskPref": "Balanced",
     "priority": "High"
   }
 }

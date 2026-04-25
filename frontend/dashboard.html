@@ -1,158 +1,264 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>LifeTrack — Dashboard</title>
-<link rel="stylesheet" href="style.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LifeTrack — Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body data-page="dashboard">
 
-<nav class="navbar">
-  <a class="nav-brand" href="index.html">
-    <div class="nav-logo-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-    <span class="nav-title">LifeTrack</span><span class="nav-tag">PS-09</span>
-  </a>
-  <div class="nav-links">
-    <a class="nav-link" href="index.html">Home</a>
-    <a class="nav-link active" href="dashboard.html">Dashboard</a>
-    <a class="nav-link" href="goals.html">Goals</a>
-    <a class="nav-link" href="insights.html">Insights</a>
-    <a class="nav-link" href="learning.html">Learning</a>
-  </div>
-  <div class="nav-right">
-    <div class="conn-badge offline"><span class="conn-dot"></span>Offline Mode</div>
-    <a class="nav-cta" href="goals.html">+ Add Goal</a>
-    <button class="nav-burger">☰</button>
-  </div>
-</nav>
+  <nav class="navbar">
+    <a class="nav-brand" href="index.html">
+      <div class="nav-logo-box"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+        </svg></div>
+      <span class="nav-title">LifeTrack</span><span class="nav-tag">PS-09</span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link active" href="dashboard.html">Dashboard</a>
+      <a class="nav-link" href="goals.html">Goals</a>
+      <a class="nav-link" href="insights.html">Insights</a>
+      <a class="nav-link" href="learning.html">Learning</a>
+    </div>
+    <div class="nav-right">
+      <div class="conn-badge offline"><span class="conn-dot"></span>Offline Mode</div>
+      <a class="nav-cta" href="goals.html">+ Add Goal</a>
+      <button class="nav-burger">☰</button>
+    </div>
+  </nav>
 
-<div class="page slide-stack">
-  
-  <!-- WELCOME CARD SLIDE -->
-  <div class="slide-item">
-    <div class="welcome-card" style="margin-bottom:0">
-      <div>
-        <h2 id="wd-name">Welcome <span class="wave-emoji">👋</span></h2>
-        <p id="wd-personality">Loading your profile…</p>
+  <div class="page slide-stack">
+
+    <!-- WELCOME CARD SLIDE -->
+    <div class="slide-item">
+      <div class="welcome-card" style="margin-bottom:0">
+        <div>
+          <h2 id="wd-name">Welcome <span class="wave-emoji">👋</span></h2>
+          <p id="wd-personality">Loading your profile…</p>
+        </div>
+        <div class="personality-pill" id="wd-pill">—</div>
       </div>
-      <div class="personality-pill" id="wd-pill">—</div>
+    </div>
+
+    <!-- STATS SLIDE -->
+    <div class="slide-item">
+      <div class="stats-grid">
+        <div class="stat-card reveal-right stagger-1">
+          <div class="icon-box indigo"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <line x1="12" y1="1" x2="12" y2="23" />
+              <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+            </svg></div>
+          <div class="stat-body">
+            <div class="stat-label">Final Wealth</div>
+            <div class="stat-val" id="s-wealth">₹—</div>
+            <div class="stat-hint">Age 80 corpus</div>
+          </div>
+        </div>
+        <div class="stat-card reveal-right stagger-2">
+          <div class="icon-box green"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <rect x="2" y="7" width="20" height="14" rx="2" />
+              <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16" />
+            </svg></div>
+          <div class="stat-body">
+            <div class="stat-label">Monthly Savings</div>
+            <div class="stat-val" id="s-savings">₹—</div>
+            <div class="stat-hint">Current input</div>
+          </div>
+        </div>
+        <div class="stat-card reveal-right stagger-3">
+          <div class="icon-box amber"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <polyline points="20 6 9 17 4 12" />
+            </svg></div>
+          <div class="stat-body">
+            <div class="stat-label">Goals On Track</div>
+            <div class="stat-val" id="s-ontrack">—</div>
+            <div class="stat-hint">Achievable goals</div>
+          </div>
+        </div>
+        <div class="stat-card reveal-right stagger-4">
+          <div class="icon-box rose"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg></div>
+          <div class="stat-body">
+            <div class="stat-label">Health Score</div>
+            <div class="stat-val" id="s-score">—</div>
+            <div class="stat-hint">Based on profile</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MARKET OVERVIEW (INDEXES) -->
+    <div class="slide-item">
+      <div class="market-overview">
+        <div class="index-card reveal-right stagger-1">
+          <div class="index-name">NIFTY 50</div>
+          <div class="index-val">22,419.65</div>
+          <div class="index-change trend-up">▲ 268.30 (1.21%)</div>
+          <div class="sparkline"><svg viewBox="0 0 100 30">
+              <path class="spark-up" d="M0,25 L10,22 L20,24 L30,18 L40,20 L50,15 L60,18 L70,10 L80,12 L90,5 L100,8" />
+            </svg></div>
+        </div>
+        <div class="index-card reveal-right stagger-2">
+          <div class="index-name">SENSEX</div>
+          <div class="index-val">73,738.45</div>
+          <div class="index-change trend-up">▲ 663.23 (0.91%)</div>
+          <div class="sparkline"><svg viewBox="0 0 100 30">
+              <path class="spark-up" d="M0,20 L10,22 L20,18 L30,20 L40,15 L50,18 L60,12 L70,14 L80,8 L90,10 L100,5" />
+            </svg></div>
+        </div>
+        <div class="index-card reveal-right stagger-3">
+          <div class="index-name">BANK NIFTY</div>
+          <div class="index-val">48,201.05</div>
+          <div class="index-change trend-up">▲ 412.10 (0.86%)</div>
+          <div class="sparkline"><svg viewBox="0 0 100 30">
+              <path class="spark-up" d="M0,25 L20,15 L40,22 L60,10 L80,18 L100,5" />
+            </svg></div>
+        </div>
+        <div class="index-card reveal-right stagger-4">
+          <div class="index-name">GOLD (24K)</div>
+          <div class="index-val">72,450.00</div>
+          <div class="index-change trend-down">▼ 210.00 (0.29%)</div>
+          <div class="sparkline"><svg viewBox="0 0 100 30">
+              <path class="spark-down" d="M0,5 L10,8 L20,5 L30,12 L40,10 L50,18 L60,15 L70,22 L80,20 L90,28 L100,25" />
+            </svg></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="layout slide-item">
+      <!-- SIDEBAR: WHAT-IF CONTROLS -->
+      <aside class="sidebar reveal-right stagger-1">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">What-If Controls</div>
+              <div class="card-sub">Adjust and see live impact</div>
+            </div>
+          </div>
+          <div class="slider-grp"><label>Current Age <span class="sv" id="lbl-age">28</span></label><input type="range"
+              id="sl-age" min="18" max="60" /></div>
+          <div class="slider-grp"><label>Monthly Savings <span class="sv" id="lbl-sav">₹15,000</span></label><input
+              type="range" id="sl-sav" min="1000" max="200000" step="1000" /></div>
+          <div class="slider-grp"><label>Net Worth <span class="sv" id="lbl-nw">₹2,00,000</span></label><input
+              type="range" id="sl-nw" min="0" max="10000000" step="10000" /></div>
+          <div class="slider-grp"><label>Annual Return <span class="sv" id="lbl-ret">10%</span></label><input
+              type="range" id="sl-ret" min="1" max="30" /></div>
+          <div class="toggle-row">
+            <label class="toggle-label"><input type="checkbox" id="infl-tog" /><span class="tog"></span>Inflation
+              Adjust</label>
+          </div>
+          <div id="infl-grp" style="display:none">
+            <div class="slider-grp"><label>Inflation Rate <span class="sv" id="lbl-infl">5%</span></label><input
+                type="range" id="sl-infl" min="1" max="15" /></div>
+          </div>
+          <div style="border-top:1px solid #E5E7EB;padding-top:14px;margin-top:4px">
+            <div class="card-sub" style="margin-bottom:8px">Zoom View</div>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-sm btn-outline zoom-btn active" data-zoom="full">Full Life</button>
+              <button class="btn btn-sm btn-outline zoom-btn" data-zoom="10">10 Year</button>
+              <button class="btn btn-sm btn-outline zoom-btn" data-zoom="5">5 Year</button>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- MAIN -->
+      <div class="main">
+        <div class="card reveal-right stagger-2">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Wealth Projection</div>
+              <div class="card-sub">Growth with milestones</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;font-size:.78rem;font-weight:600;color:#6B7280">
+              <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#4F46E5;margin-right:4px"></span>Wealth</span>
+              <span><span style="display:inline-block;width:12px;height:2px;background:#94A3B8;margin-right:4px;vertical-align:middle"></span>Invested</span>
+              <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#059669;margin-right:4px"></span>On Track</span>
+              <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#E11D48;margin-right:4px"></span>At Risk</span>
+            </div>
+          </div>
+          <div class="canvas-wrap"><canvas id="projChart"></canvas></div>
+        </div>
+
+        <div class="card reveal-right stagger-3">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Smart Insights</div>
+              <div class="card-sub">AI Suggestions</div>
+            </div>
+          </div>
+          <div id="insight-box">
+            <div class="insight-item neutral">📊 Add goals to see smart insights.</div>
+          </div>
+        </div>
+
+        <!-- SIP CALCULATOR -->
+        <div class="card reveal-right stagger-4"
+          style="background: linear-gradient(135deg, var(--indigo), #6366F1, #818CF8); color: white; border: none; margin-bottom: 24px;">
+          <div class="card-header">
+            <div class="card-title" style="color:white">📈 SIP Calculator</div>
+            <div class="card-sub" style="color:rgba(255,255,255,0.8)">Estimate your wealth growth</div>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:16px">
+            <div class="form-group">
+              <label class="form-label" style="color:white">Monthly SIP (₹)</label>
+              <input type="number" id="sip-amount" class="form-input" value="10000"
+                style="background:rgba(255,255,255,0.1); border-color:rgba(255,255,255,0.2); color:white"
+                oninput="runSipCalc()">
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="color:white">Expected Return (%)</label>
+              <input type="number" id="sip-return" class="form-input" value="12"
+                style="background:rgba(255,255,255,0.1); border-color:rgba(255,255,255,0.2); color:white"
+                oninput="runSipCalc()">
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="color:white">Period (Years)</label>
+              <input type="number" id="sip-years" class="form-input" value="10"
+                style="background:rgba(255,255,255,0.1); border-color:rgba(255,255,255,0.2); color:white"
+                oninput="runSipCalc()">
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="color:white">Est. Maturity</label>
+              <div id="sip-result" style="font-size:1.2rem; font-weight:800; padding:10px 0">₹—</div>
+            </div>
+          </div>
+          <div style="font-size:0.75rem; opacity:0.8; border-top:1px solid rgba(255,255,255,0.2); padding-top:10px; display:flex; gap:20px">
+          <div>Total Invested: <span id="sip-invested" style="font-weight:700">₹—</span></div>
+          <div>Wealth Gained: <span id="sip-gain" style="font-weight:700">₹—</span></div>
+        </div>
+        </div>
+
+        <!-- MARKET EXPLORER SLIDE -->
+        <div class="card reveal-right stagger-5">
+          <div class="card-header">
+            <div class="card-title">📈 Popular Market SIPs</div>
+            <div class="card-sub">Live prices via LifeTrack Market Feed</div>
+          </div>
+          <div class="market-list" id="market-list">
+            <div class="insight-item neutral">Loading live market data...</div>
+          </div>
+          <button class="btn btn-outline btn-full" style="margin-top:16px">View Full Market →</button>
+        </div>
+
+      </div>
     </div>
   </div>
 
-  <!-- STATS SLIDE -->
-  <div class="slide-item">
-    <div class="stats-grid">
-      <div class="stat-card reveal-right stagger-1">
-        <div class="icon-box indigo"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
-        <div class="stat-body"><div class="stat-label">Final Wealth</div><div class="stat-val" id="s-wealth">₹—</div><div class="stat-hint">Age 80 corpus</div></div>
-      </div>
-      <div class="stat-card reveal-right stagger-2">
-        <div class="icon-box green"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div>
-        <div class="stat-body"><div class="stat-label">Monthly Savings</div><div class="stat-val" id="s-savings">₹—</div><div class="stat-hint">Current input</div></div>
-      </div>
-      <div class="stat-card reveal-right stagger-3">
-        <div class="icon-box amber"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <div class="stat-body"><div class="stat-label">Goals On Track</div><div class="stat-val" id="s-ontrack">—</div><div class="stat-hint">Achievable goals</div></div>
-      </div>
-      <div class="stat-card reveal-right stagger-4">
-        <div class="icon-box rose"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-        <div class="stat-body"><div class="stat-label">Health Score</div><div class="stat-val" id="s-score">—</div><div class="stat-hint">Based on profile</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="layout slide-item">
-    <!-- SIDEBAR: WHAT-IF CONTROLS -->
-    <aside class="sidebar reveal-right stagger-1">
-      <div class="card">
-        <div class="card-header"><div><div class="card-title">What-If Controls</div><div class="card-sub">Adjust and see live impact</div></div></div>
-        <div class="slider-grp"><label>Current Age <span class="sv" id="lbl-age">28</span></label><input type="range" id="sl-age" min="18" max="60"/></div>
-        <div class="slider-grp"><label>Monthly Savings <span class="sv" id="lbl-sav">₹15,000</span></label><input type="range" id="sl-sav" min="1000" max="200000" step="1000"/></div>
-        <div class="slider-grp"><label>Net Worth <span class="sv" id="lbl-nw">₹2,00,000</span></label><input type="range" id="sl-nw" min="0" max="10000000" step="10000"/></div>
-        <div class="slider-grp"><label>Annual Return <span class="sv" id="lbl-ret">10%</span></label><input type="range" id="sl-ret" min="1" max="30"/></div>
-        <div class="toggle-row">
-          <label class="toggle-label"><input type="checkbox" id="infl-tog"/><span class="tog"></span>Inflation Adjust</label>
-        </div>
-        <div id="infl-grp" style="display:none">
-          <div class="slider-grp"><label>Inflation Rate <span class="sv" id="lbl-infl">5%</span></label><input type="range" id="sl-infl" min="1" max="15"/></div>
-        </div>
-        <div style="border-top:1px solid #E5E7EB;padding-top:14px;margin-top:4px">
-          <div class="card-sub" style="margin-bottom:8px">Zoom View</div>
-          <div style="display:flex;gap:8px">
-            <button class="btn btn-sm btn-outline zoom-btn active" data-zoom="full">Full Life</button>
-            <button class="btn btn-sm btn-outline zoom-btn" data-zoom="10">10 Year</button>
-            <button class="btn btn-sm btn-outline zoom-btn" data-zoom="5">5 Year</button>
-          </div>
-        </div>
-      </div>
-    </aside>
-
-    <!-- MAIN -->
-    <div class="main">
-      <div class="card reveal-right stagger-2">
-        <div class="card-header">
-          <div><div class="card-title">Wealth Projection</div><div class="card-sub">Growth with milestones</div></div>
-          <div style="display:flex;align-items:center;gap:12px;font-size:.78rem;font-weight:600;color:#6B7280">
-            <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#4F46E5;margin-right:4px"></span>Wealth</span>
-            <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#059669;margin-right:4px"></span>On Track</span>
-            <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#E11D48;margin-right:4px"></span>At Risk</span>
-          </div>
-        </div>
-        <div class="canvas-wrap"><canvas id="projChart"></canvas></div>
-      </div>
-
-      <div class="card reveal-right stagger-3">
-        <div class="card-header"><div><div class="card-title">Smart Insights</div><div class="card-sub">AI Suggestions</div></div></div>
-        <div id="insight-box"><div class="insight-item neutral">📊 Add goals to see smart insights.</div></div>
-      </div>
-
-      <!-- SIP CALCULATOR -->
-      <div class="card reveal-right stagger-4" style="background: linear-gradient(135deg, var(--indigo), #6366F1, #818CF8); color: white; border: none; margin-bottom: 24px;">
-        <div class="card-header"><div class="card-title" style="color:white">📈 SIP Calculator</div><div class="card-sub" style="color:rgba(255,255,255,0.8)">Estimate your wealth growth</div></div>
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:16px">
-          <div class="form-group">
-            <label class="form-label" style="color:white">Monthly SIP (₹)</label>
-            <input type="number" id="sip-amount" class="form-input" value="10000" style="background:rgba(255,255,255,0.1); border-color:rgba(255,255,255,0.2); color:white" oninput="runSipCalc()">
-          </div>
-          <div class="form-group">
-            <label class="form-label" style="color:white">Expected Return (%)</label>
-            <input type="number" id="sip-return" class="form-input" value="12" style="background:rgba(255,255,255,0.1); border-color:rgba(255,255,255,0.2); color:white" oninput="runSipCalc()">
-          </div>
-          <div class="form-group">
-            <label class="form-label" style="color:white">Period (Years)</label>
-            <input type="number" id="sip-years" class="form-input" value="10" style="background:rgba(255,255,255,0.1); border-color:rgba(255,255,255,0.2); color:white" oninput="runSipCalc()">
-          </div>
-          <div class="form-group">
-            <label class="form-label" style="color:white">Est. Maturity</label>
-            <div id="sip-result" style="font-size:1.2rem; font-weight:800; padding:10px 0">₹—</div>
-          </div>
-        </div>
-        <div style="font-size:0.75rem; opacity:0.8; border-top:1px solid rgba(255,255,255,0.2); padding-top:10px">
-          Wealth Gained: <span id="sip-gain" style="font-weight:700">₹—</span>
-        </div>
-      </div>
-
-      <!-- MARKET EXPLORER SLIDE -->
-      <div class="card reveal-right stagger-5">
-        <div class="card-header"><div class="card-title">📈 Popular Market SIPs</div><div class="card-sub">Live prices via LifeTrack Market Feed</div></div>
-        <div class="market-list" id="market-list">
-          <div class="insight-item neutral">Loading live market data...</div>
-        </div>
-        <button class="btn btn-outline btn-full" style="margin-top:16px">View Full Market →</button>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<script src="script.js"></script>
-<script>
-window.addEventListener('resize',()=>{
-  loadSettings().then(s=>loadGoals().then(g=>{
-    const{pts,dds}=buildProjection(s,g);
-    drawChart('projChart',pts,dds,'full',s.age);
-  }));
-});
-</script>
+  <script src="script.js"></script>
+  <script>
+    window.addEventListener('resize', () => {
+      loadSettings().then(s => loadGoals().then(g => {
+        const { pts, dds } = buildProjection(s, g);
+        drawChart('projChart', pts, dds, 'full', s.age);
+      }));
+    });
+  </script>
 </body>
+
 </html>
